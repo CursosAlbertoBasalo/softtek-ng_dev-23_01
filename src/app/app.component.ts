@@ -3,39 +3,32 @@ import { Component } from "@angular/core";
 @Component({
   selector: "lab-root",
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
+    <header>
       <h1> Welcome to {{ title }}! </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2
-          ><a target="_blank" rel="noopener" href="https://angular.io/tutorial"
-            >Tour of Heroes</a
-          ></h2
-        >
-      </li>
-      <li>
-        <h2
-          ><a target="_blank" rel="noopener" href="https://angular.io/cli"
-            >CLI Documentation</a
-          ></h2
-        >
-      </li>
-      <li>
-        <h2
-          ><a target="_blank" rel="noopener" href="https://blog.angular.io/"
-            >Angular blog</a
-          ></h2
-        >
-      </li>
-    </ul>
+      <p>
+        sumar {{ numberOne }} + {{ numberTwo }} =
+        {{ sumar(numberOne, numberTwo) }}
+      </p>
+    </header>
     <router-outlet></router-outlet>
+    <footer>
+      <span>{{ title }} app is running!</span>
+      <span>
+        <a [href]="repoUrl" target="_blank"> Repository on gitHub </a>
+      </span>
+      <span> ©️ {{ year }} </span>
+    </footer>
   `,
   styles: [],
 })
 export class AppComponent {
-  title = "softtek-angular_intro-enero";
+  title = "Activity bookings";
+  repoUrl = "https://github.com/classroomLabs/softtek-angular_intro-enero";
+  year = new Date().getFullYear();
+  numberOne = 77;
+  numberTwo = 88;
+
+  sumar(uno: number, dos: number) {
+    return uno + dos;
+  }
 }

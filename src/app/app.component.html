@@ -1,7 +1,13 @@
 <header>
   <h1> Welcome to {{ title }}! </h1>
 </header>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+  <span>We have {{ activities.length }} activities</span>
+  <ul>
+    <li *ngFor="let activity of activities"> {{ activity.title }} </li>
+  </ul>
+</main>
 <footer>
   <span>{{ title }} app is running!</span>
   <span>

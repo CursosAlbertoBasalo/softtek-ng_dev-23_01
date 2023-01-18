@@ -10,5 +10,5 @@ export class AppComponent {
   title = "Activity bookings";
   repoUrl = "https://github.com/classroomLabs/softtek-angular_intro-enero";
   year = new Date().getFullYear();
-  activities = DATA.activities;
+  activities = DATA.activities.filter((a) => a.status === "published");
 }

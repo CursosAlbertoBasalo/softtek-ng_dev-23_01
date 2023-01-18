@@ -2,11 +2,14 @@ import { Component } from "@angular/core";
 
 @Component({
   selector: "lab-root",
-  templateUrl: "./app.component.html",
+  template: `
+    <lab-header></lab-header>
+    <main>
+      <router-outlet></router-outlet>
+      <lab-activities></lab-activities>
+    </main>
+    <lab-footer></lab-footer>
+  `,
   styles: [],
 })
-export class AppComponent {
-  title = "Activity bookings";
-  repoUrl = "https://github.com/classroomLabs/softtek-angular_intro-enero";
-  year = new Date().getFullYear();
-}
+export class AppComponent {}

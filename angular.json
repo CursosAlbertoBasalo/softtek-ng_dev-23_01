@@ -76,6 +76,7 @@
           "skipTests": true
         },
         "@schematics/angular:component": {
+          "flat": true,
           "inlineStyle": true,
           "inlineTemplate": true,
           "skipTests": true

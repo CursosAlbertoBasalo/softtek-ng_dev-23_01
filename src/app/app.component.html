@@ -3,21 +3,7 @@
 </header>
 <main>
   <router-outlet></router-outlet>
-  <article>
-    <header>
-      <strong>We have {{ activities.length }} activities</strong>
-    </header>
-    <ul>
-      <li *ngFor="let activity of activities">
-        <span>{{ activity.title }}</span>
-        <span> 🧭 {{ activity.location | uppercase }}</span>
-        <span> 📅 {{ activity.date | date : "dd-MMM-yyyy" }}</span>
-        <span> 💲 {{ activity.price | number : "0.2" }}</span>
-        <span *ngIf="activity.ageCategory === 'adult'"> 🏃🏼 </span>
-        <span *ngIf="activity.ageCategory === 'family'"> 👨‍👩‍👧‍👦 </span>
-      </li>
-    </ul>
-  </article>
+  <lab-activities></lab-activities>
 </main>
 <footer>
   <span>{{ title }} app is running!</span>

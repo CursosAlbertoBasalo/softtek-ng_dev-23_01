@@ -4,9 +4,18 @@ import { Component } from "@angular/core";
   selector: "lab-header",
   template: `
     <header>
-      <a>
-        <h1 routerLink="./"> 🏠 {{ title | titlecase }}! </h1>
-      </a>
+      <nav>
+        <ul>
+          <li>
+            <a>
+              <strong routerLink="./"> 🏠 {{ title | titlecase }}! </strong>
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <li> <a routerLink="auth/register"> 🔏 Register </a> </li>
+        </ul>
+      </nav>
     </header>
   `,
   styles: [],

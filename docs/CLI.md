@@ -31,5 +31,5 @@ ng g c routes/about
 # lazy
 ng g m routes/contact --routing
 ng g c routes/contact/contact
-
+ng g m routes/auth/register --route=auth/register -m=app
 ```

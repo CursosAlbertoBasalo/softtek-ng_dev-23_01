@@ -26,6 +26,10 @@ ng g c ui/price --export
 ## Routes
 
 ```bash
- ng g c routes/about
+# eager
+ng g c routes/about
+# lazy
+ng g m routes/contact --routing
+ng g c routes/contact/contact
 
 ```

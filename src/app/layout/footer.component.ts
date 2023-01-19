@@ -15,6 +15,9 @@ import { Component } from "@angular/core";
         <span>
           <a routerLink="about"> About us </a>
         </span>
+        <span>
+          <a routerLink="contact"> Get in contact </a>
+        </span>
       </section>
     </footer>
   `,

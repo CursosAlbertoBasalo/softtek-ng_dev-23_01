@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { DATA } from "src/app/data.repository";
 
 @Component({
-  selector: "lab-activities",
   template: `
     <article>
       <header>

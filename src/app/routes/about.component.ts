@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'lab-about',
-  template: `
-    <p>
-      about works!
-    </p>
+  template: `    
+    <article>
+      <header>
+        <lab-card-title title="About us"/>
+      </header>
+    </article>
   `,
-  styles: [
-  ]
+  styles: [],
 })
-export class AboutComponent {
-
-}
+export class AboutComponent {}

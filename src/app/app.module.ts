@@ -3,12 +3,13 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { LayoutModule } from "src/app/layout/layout.module";
 import { UiModule } from "src/app/ui/ui.module";
-import { ActivitiesComponent } from "./activities.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { AboutComponent } from "./routes/about.component";
+import { ActivitiesComponent } from "./routes/activities.component";
 
 @NgModule({
-  declarations: [AppComponent, ActivitiesComponent],
+  declarations: [AppComponent, ActivitiesComponent, AboutComponent],
   imports: [BrowserModule, AppRoutingModule, LayoutModule, UiModule],
   providers: [],
   bootstrap: [AppComponent],

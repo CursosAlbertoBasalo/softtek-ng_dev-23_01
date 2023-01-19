@@ -4,7 +4,9 @@ import { Component } from "@angular/core";
   selector: "lab-header",
   template: `
     <header>
-      <h1> Welcome to {{ title | titlecase }}! </h1>
+      <a>
+        <h1 routerLink="./"> 🏠 {{ title | titlecase }}! </h1>
+      </a>
     </header>
   `,
   styles: [],

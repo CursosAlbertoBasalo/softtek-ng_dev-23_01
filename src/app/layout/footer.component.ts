@@ -3,12 +3,19 @@ import { Component } from "@angular/core";
 @Component({
   selector: "lab-footer",
   template: `
-    <footer>
-      <span>{{ title }} app is running!</span>
-      <span>
-        <a [href]="repoUrl" target="_blank"> Repository on gitHub </a>
-      </span>
-      <span> ©️ {{ year }} </span>
+    <footer class="grid">
+      <section>
+        <span>{{ title }} app is running!</span>
+        <span>
+          <a [href]="repoUrl" target="_blank"> Repository on gitHub </a>
+        </span>
+        <span> ©️ {{ year }} </span>
+      </section>
+      <section>
+        <span>
+          <a routerLink="about"> About us </a>
+        </span>
+      </section>
     </footer>
   `,
   styles: [],

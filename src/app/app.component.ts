@@ -6,7 +6,6 @@ import { Component } from "@angular/core";
     <lab-header/>
     <main>
       <router-outlet/>
-      <lab-activities/>
     </main>
     <lab-footer/>
   `,

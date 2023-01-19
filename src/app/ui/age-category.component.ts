@@ -15,10 +15,10 @@ export class AgeCategoryComponent {
   private defaultAgeCategory = { caption: "", icon: "❔" };
 
   getTooltip() {
-    this.getAgeCategory().caption;
+    return this.getAgeCategory().caption;
   }
   getIcon() {
-    this.getAgeCategory().icon;
+    return this.getAgeCategory().icon;
   }
   private getAgeCategory() {
     const ageCategory = this.ageCategories.find(

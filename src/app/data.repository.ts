@@ -54,7 +54,7 @@ export const DATA = {
       userId: 2,
     },
     {
-      ageCategory: "family",
+      ageCategory: "child",
       currency: "USD",
       currentParticipants: null,
       date: "2023-11-09",

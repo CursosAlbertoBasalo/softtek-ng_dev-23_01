@@ -6,22 +6,15 @@ import { DATA } from "src/app/data.repository";
   template: `
     <article>
       <header>
-        <strong>Published Activities {{ activities.length }}</strong>
+        <lab-card-title [title]="getTitle()"/>
       </header>
       <ul>
         <li *ngFor="let activity of activities">
-          <span *ngIf="activity.ageCategory === 'adult'" data-tooltip="Adults">
-            🏃🏼
-          </span>
-          <span
-            *ngIf="activity.ageCategory === 'family'"
-            data-tooltip="Every one">
-            👨‍👩‍👧‍👦
-          </span>
+          <lab-age-category [ageCategory]="activity.ageCategory"/>
           <span>{{ activity.title }}</span>
-          <span> 🧭 {{ activity.location | uppercase }}</span>
-          <span> 📅 {{ activity.date | date : "dd-MMM-yyyy" }}</span>
-          <span> 🪙 {{ activity.price | currency : activity.currency }}</span>
+          <lab-location [location]="activity.location"/>
+          <lab-date [dateValue]="activity.date"/>
+          <lab-price [price]="activity.price" [currency]="activity.currency"/>
         </li>
       </ul>
     </article>
@@ -30,4 +23,7 @@ import { DATA } from "src/app/data.repository";
 })
 export class ActivitiesComponent {
   activities = DATA.activities.filter((a) => a.status === "published");
+  getTitle() {
+    return `Published Activities ${this.activities.length}`;
+  }
 }

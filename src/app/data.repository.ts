@@ -7,6 +7,7 @@ export const DATA = {
   activities: [
     {
       ageCategory: "adult",
+      currency: "USD",
       date: "2025-01-01",
       description:
         "## Rafting at the Grand Canyon\r\n Experience the **adrenaline** in this _natural wonder_.",
@@ -14,7 +15,7 @@ export const DATA = {
       location: "Grand canyon",
       maxParticipants: 10,
       minParticipants: 5,
-      price: 100,
+      price: 300,
       slug: "grand-canyon-rafting",
       status: "published",
       title: "Grand canyon rafting",
@@ -29,7 +30,8 @@ export const DATA = {
       location: "Cumbre Vieja",
       maxParticipants: 30,
       minParticipants: 10,
-      price: 20,
+      price: 50,
+      currency: "EUR",
       slug: "cumbre-vieja-exploration",
       status: "published",
       title: "Cumbre Vieja exploration",
@@ -37,6 +39,7 @@ export const DATA = {
     },
     {
       ageCategory: "adult",
+      currency: "EUR",
       date: "2024-01-01",
       description:
         "## Hot air Ballon ride over Cappadocia\r\n Experience the **tranquility** in this _natural beauty_.",
@@ -52,6 +55,7 @@ export const DATA = {
     },
     {
       ageCategory: "family",
+      currency: "USD",
       currentParticipants: null,
       date: "2023-11-09",
       description:
@@ -60,7 +64,7 @@ export const DATA = {
       location: "Lucerne",
       maxParticipants: 6,
       minParticipants: 4,
-      price: "50",
+      price: "25",
       slug: "stand-up-paddle-surf-in-lake-lucerne",
       status: "published",
       title: "Stand-up paddle surf in Lake Lucerne",

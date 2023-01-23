@@ -36,4 +36,5 @@ ng g m routes/auth/register --route=auth/register -m=app
 ng g m routes/activities --route=activities -m=app
 ng g m routes/activities/createActivity --route=activities/create -m=activities
 ng g m routes/activities/activity --route=activities/:slug -m=activities
+# refactor (create about and home lazy modules)
 ```

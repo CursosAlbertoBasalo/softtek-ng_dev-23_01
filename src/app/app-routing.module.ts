@@ -1,16 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AboutComponent } from "src/app/routes/about.component";
-import { ActivitiesComponent } from "src/app/routes/activities.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: ActivitiesComponent,
-  },
-  {
-    path: "about",
-    component: AboutComponent,
+    loadChildren: () =>
+      import("./routes/home/home.module").then((m) => m.HomeModule),
   },
   {
     path: "contact",
@@ -30,6 +25,15 @@ const routes: Routes = [
       import("./routes/activities/activities.module").then(
         (m) => m.ActivitiesModule
       ),
+  },
+  {
+    path: "about",
+    loadChildren: () =>
+      import("./routes/about/about.module").then((m) => m.AboutModule),
+  },
+  {
+    path: "**",
+    redirectTo: "",
   },
 ];
 

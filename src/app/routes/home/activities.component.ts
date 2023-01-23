@@ -2,10 +2,11 @@ import { Component } from "@angular/core";
 import { DATA } from "src/app/data.repository";
 
 @Component({
+  selector: "lab-activities",
   template: `
     <article>
       <header >
-        <nav>
+        <nav> 
           <lab-card-title [title]="getTitle()"/>
           <a routerLink="activities/create">Create activity</a>
         </nav>

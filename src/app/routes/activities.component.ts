@@ -4,13 +4,16 @@ import { DATA } from "src/app/data.repository";
 @Component({
   template: `
     <article>
-      <header>
-        <lab-card-title [title]="getTitle()"/>
+      <header >
+        <nav>
+          <lab-card-title [title]="getTitle()"/>
+          <a routerLink="activities/create">Create activity</a>
+        </nav>
       </header>
       <ul>
         <li *ngFor="let activity of activities">
           <lab-age-category [ageCategory]="activity.ageCategory"/>
-          <span>{{ activity.title }}</span>
+          <span><a [routerLink]=" ['activities' , activity.slug]"> {{ activity.title }}</a></span>
           <lab-location [location]="activity.location"/>
           <lab-date [dateValue]="activity.date"/>
           <lab-price [price]="activity.price" [currency]="activity.currency"/>

@@ -13,6 +13,7 @@ import { Component } from "@angular/core";
           </li>
         </ul>
         <ul>
+          <li> <a routerLink="activities"> ➡️ Activities </a> </li>
           <li> <a routerLink="auth/register"> 🔏 Register </a> </li>
         </ul>
       </nav>

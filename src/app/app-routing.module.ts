@@ -24,6 +24,13 @@ const routes: Routes = [
         (m) => m.RegisterModule
       ),
   },
+  {
+    path: "activities",
+    loadChildren: () =>
+      import("./routes/activities/activities.module").then(
+        (m) => m.ActivitiesModule
+      ),
+  },
 ];
 
 @NgModule({

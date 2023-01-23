@@ -1,15 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'lab-create-activity',
+  selector: "lab-create-activity",
   template: `
-    <p>
-      create-activity works!
-    </p>
+    <h3> Create your activity </h3>
+    <form> </form>
   `,
-  styles: [
-  ]
+  styles: [],
 })
-export class CreateActivityComponent {
-
-}
+export class CreateActivityComponent {}

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Activity } from "src/app/data/models/activity.type";
 
 @Component({
   selector: "lab-create-activity-form",
@@ -71,7 +72,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class CreateActivityFormComponent {
   @Input() ageCategories: any[] = [];
-  @Output() create = new EventEmitter<unknown>();
+  @Output() create = new EventEmitter<Activity>();
 
   form: FormGroup;
   constructor(fb: FormBuilder) {

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { DATA } from "src/app/data.repository";
+import { DATA } from "src/app/data/data.repository";
 
 @Component({
   selector: "lab-age-category",

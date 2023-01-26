@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
@@ -44,6 +44,17 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
         <small *ngIf="hasMessage('price')">
           {{ getError("price") }}
         </small>
+        <label for="ageCategory"> Age Category </label>
+        <select
+          id="ageCategory"
+          name="ageCategory"
+          formControlName="ageCategory">
+          <option
+            *ngFor="let ageCategory of ageCategories"
+            [value]="ageCategory.id">
+            {{ ageCategory.icon + ageCategory.caption }}
+          </option>
+        </select>
       </fieldset>
       <div>
         <button class="secondary" (click)="form.reset()">Reset</button>
@@ -59,6 +70,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styles: [],
 })
 export class CreateActivityFormComponent {
+  @Input() ageCategories: any[] = [];
   @Output() create = new EventEmitter<unknown>();
 
   form: FormGroup;
@@ -83,6 +95,7 @@ export class CreateActivityFormComponent {
       date: ["", [Validators.required]],
       location: ["", [Validators.required]],
       price: [10, [Validators.min(10), Validators.max(1000)]],
+      ageCategory: ["child", [Validators.required]],
     });
   }
 

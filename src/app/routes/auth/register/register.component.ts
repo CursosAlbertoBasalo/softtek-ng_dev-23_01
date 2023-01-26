@@ -40,11 +40,12 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
           name="confirmPassword"
           formControlName="confirmPassword"
           [attr.aria-invalid]="isInvalid('confirmPassword')" />
-        <small *ngIf="hasMessage('confirmPassword')">{{
-          getError("confirmPassword")
-        }}</small>
+        <small *ngIf="hasMessage('confirmPassword')">
+          {{ getError("confirmPassword") }}
+        </small>
       </fieldset>
       <div>
+        <button class="secondary" (click)="form.reset()">Reset</button>
         <button type="submit" (click)="register()" [disabled]="form.invalid">
           Register me
         </button>
@@ -97,9 +98,9 @@ export class RegisterComponent {
   }
 
   register() {
-    const pasword = this.form.controls["password"].value;
+    const password = this.form.controls["password"].value;
     const confirmPassword = this.form.controls["confirmPassword"].value;
-    if (pasword !== confirmPassword) {
+    if (password !== confirmPassword) {
       this.form.controls["confirmPassword"].setErrors({ notSame: true });
       console.log("Passwords do not match");
       return;

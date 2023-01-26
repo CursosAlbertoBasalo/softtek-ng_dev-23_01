@@ -33,9 +33,16 @@ ng g m routes/contact --routing
 ng g c routes/contact/contact
 ng g m routes/auth/register --route=auth/register -m=app
 ng g m routes/activities --route=activities -m=app
-ng g m routes/activities/createActivity --route=create -m=activities
+ng g m routes/activities/create-activity --route=create -m=activities
 ng g m routes/activities/activity --route=:slug -m=activities
 # refactor (create about and home lazy modules)
 ng g m routes/about --route=about -m=app
 ng g m routes/home --route=home -m=app
+```
+
+## Forms
+
+```bash
+# generate a presentation component
+ng g c routes/activities/create-activity/create-activity-form --flat
 ```

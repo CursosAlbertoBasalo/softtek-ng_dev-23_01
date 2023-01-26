@@ -4,7 +4,7 @@ import { Component } from "@angular/core";
   selector: "lab-create-activity",
   template: `
     <h3> Create your activity </h3>
-    <form> </form>
+    <lab-create-activity-form></lab-create-activity-form>
   `,
   styles: [],
 })

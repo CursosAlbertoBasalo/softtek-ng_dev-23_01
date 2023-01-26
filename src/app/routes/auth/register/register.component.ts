@@ -7,34 +7,50 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
     <form [formGroup]="form">
       <fieldset>
         <label for="name">Your name</label>
-        <input type="text" id="name" name="name" formControlName="name" />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          formControlName="name"
+          [attr.aria-invalid]="isInvalid('name')" />
+        <small *ngIf="hasMessage('name')">{{ getError("name") }}</small>
+
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" formControlName="email" />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          [attr.aria-invalid]="isInvalid('email')" />
+        <small *ngIf="hasMessage('email')">{{ getError("email") }}</small>
+
         <label for="password">Password</label>
         <input
           type="password"
           id="password"
           name="password"
-          formControlName="password" />
+          formControlName="password"
+          [attr.aria-invalid]="isInvalid('password')" />
+        <small *ngIf="hasMessage('password')">{{ getError("password") }}</small>
+
         <label for="confirmPassword">Confirm Password</label>
         <input
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          formControlName="confirmPassword" />
+          formControlName="confirmPassword"
+          [attr.aria-invalid]="isInvalid('confirmPassword')" />
+        <small *ngIf="hasMessage('confirmPassword')">{{
+          getError("confirmPassword")
+        }}</small>
       </fieldset>
       <div>
-        <button type="submit" (click)="register()" [disabled]="form.invalid"
-          >Register me</button
-        >
+        <button type="submit" (click)="register()" [disabled]="form.invalid">
+          Register me
+        </button>
       </div>
     </form>
-    <pre>
-      <code> InValid: {{ form.invalid }}</code>
-      <code> {{ form.value | json }} </code>
-    </pre>
   `,
-  styles: [],
 })
 export class RegisterComponent {
   form: FormGroup;
@@ -42,12 +58,52 @@ export class RegisterComponent {
     this.form = fb.group({
       name: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
-      password: ["", []],
-      confirmPassword: ["", []],
+      password: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(10),
+        ],
+      ],
+      confirmPassword: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(10),
+        ],
+      ],
     });
   }
 
+  isInvalid(controlName: string) {
+    const control = this.form.controls[controlName];
+    if (control.pristine) return null;
+    return control.invalid;
+  }
+
+  hasMessage(controlName: string) {
+    const control = this.form.controls[controlName];
+    return control.invalid && (control.dirty || control.touched);
+  }
+
+  getError(controlName: string) {
+    const errors = this.form.controls[controlName].errors;
+    if (!errors) return "";
+    if (errors["required"]) return "This field is required";
+
+    return JSON.stringify(this.form.controls[controlName].errors);
+  }
+
   register() {
-    console.log(this.form.value);
+    const pasword = this.form.controls["password"].value;
+    const confirmPassword = this.form.controls["confirmPassword"].value;
+    if (pasword !== confirmPassword) {
+      this.form.controls["confirmPassword"].setErrors({ notSame: true });
+      console.log("Passwords do not match");
+      return;
+    }
+    console.log("posting to API: ", this.form.value);
   }
 }

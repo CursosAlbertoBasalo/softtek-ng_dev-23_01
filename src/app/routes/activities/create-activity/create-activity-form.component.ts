@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
@@ -45,11 +45,22 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
           {{ getError("price") }}
         </small>
       </fieldset>
+      <div>
+        <button class="secondary" (click)="form.reset()">Reset</button>
+        <button
+          type="submit"
+          (click)="onSubmitClick()"
+          [disabled]="form.invalid">
+          Create activity
+        </button>
+      </div>
     </form>
   `,
   styles: [],
 })
 export class CreateActivityFormComponent {
+  @Output() create = new EventEmitter<unknown>();
+
   form: FormGroup;
   constructor(fb: FormBuilder) {
     this.form = fb.group({
@@ -92,5 +103,10 @@ export class CreateActivityFormComponent {
     if (errors["required"]) return "This field is required";
 
     return JSON.stringify(this.form.controls[controlName].errors);
+  }
+
+  onSubmitClick() {
+    console.log("On Click", this.form.value);
+    this.create.emit(this.form.value);
   }
 }

@@ -1,9 +1,17 @@
 import { Id } from "src/app/data/models/id.type";
 
 export type Activity = {
-  id: Id;
-  name: string;
+  ageCategory: string;
+  currency: string;
+  date: string;
   description: string;
-  date: Date;
-  price?: number;
+  id: Id;
+  location: string;
+  maxParticipants: number;
+  minParticipants: number;
+  price: number;
+  slug: string;
+  status: string;
+  title: string;
+  userId: Id;
 };

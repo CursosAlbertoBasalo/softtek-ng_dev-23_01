@@ -1,9 +1,33 @@
+import { Author } from "src/app/data/models/author.type";
+import {
+  ActivityStatus,
+  AgeCategory,
+  ParticipantStatus,
+  PaymentMethod,
+} from "src/app/data/models/option.type";
+import { Participant } from "src/app/data/models/participant.type";
+import { User } from "src/app/data/models/user.type";
+import { Activity } from "./models/activity.type";
+import { Contact } from "./models/contact.type";
+
+type Data = {
+  activities: Activity[];
+  activityStatuses: ActivityStatus[];
+  ageCategories: AgeCategory[];
+  contacts: Contact[];
+  paymentMethods: PaymentMethod[];
+  participationStatuses: ParticipantStatus[];
+  author: Author;
+  participants: Participant[];
+  users: User[];
+};
+
 /*
  * This file contains an in-memory data repository
  * For  early stages of development.
  * While not having a Rest API.
  */
-export const DATA = {
+export const DATA: Data = {
   activities: [
     {
       ageCategory: "adult",
@@ -56,7 +80,6 @@ export const DATA = {
     {
       ageCategory: "child",
       currency: "USD",
-      currentParticipants: null,
       date: "2023-11-09",
       description:
         "Want you to paddleboard on **Switzerland**?\n With a surface of almost _114 square kilometers_, Lake Lucerne is a popular destination for stand-up paddlers.",
@@ -64,7 +87,7 @@ export const DATA = {
       location: "Lucerne",
       maxParticipants: 6,
       minParticipants: 4,
-      price: "25",
+      price: 25,
       slug: "stand-up-paddle-surf-in-lake-lucerne",
       status: "published",
       title: "Stand-up paddle surf in Lake Lucerne",
@@ -160,14 +183,6 @@ export const DATA = {
       phone: "+1 (212) 5555555",
       userId: 5,
       id: 4,
-    },
-  ],
-  infoRequests: [
-    {
-      date: "2023-01-01",
-      email: "jane@acme.com",
-      id: 1,
-      message: "I want to know more about this activity",
     },
   ],
   participants: [

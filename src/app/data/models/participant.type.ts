@@ -10,4 +10,5 @@ export type Participant = {
   reason: string;
   status: string;
   userId: Id;
+  acceptConditions: boolean;
 };

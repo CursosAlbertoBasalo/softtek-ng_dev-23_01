@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Activity } from "src/app/data/models/activity.type";
+import { AgeCategory } from "src/app/data/models/option.type";
 
 @Component({
   selector: "lab-create-activity-form",
@@ -71,7 +72,7 @@ import { Activity } from "src/app/data/models/activity.type";
   styles: [],
 })
 export class CreateActivityFormComponent {
-  @Input() ageCategories: any[] = [];
+  @Input() ageCategories: AgeCategory[] = [];
   @Output() create = new EventEmitter<Activity>();
 
   form: FormGroup;
@@ -100,18 +101,18 @@ export class CreateActivityFormComponent {
     });
   }
 
-  isInvalid(controlName: string) {
+  isInvalid(controlName: string): boolean | null {
     const control = this.form.controls[controlName];
     if (control.pristine) return null;
     return control.invalid;
   }
 
-  hasMessage(controlName: string) {
+  hasMessage(controlName: string): boolean {
     const control = this.form.controls[controlName];
     return control.invalid && (control.dirty || control.touched);
   }
 
-  getError(controlName: string) {
+  getError(controlName: string): string {
     const errors = this.form.controls[controlName].errors;
     if (!errors) return "";
     if (errors["required"]) return "This field is required";

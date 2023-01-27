@@ -46,16 +46,15 @@
       "userId": 2
     },
     {
-      "ageCategory": "family",
+      "ageCategory": "child",
       "currency": "USD",
-      "currentParticipants": null,
       "date": "2023-11-09",
       "description": "Want you to paddleboard on **Switzerland**?\n With a surface of almost _114 square kilometers_, Lake Lucerne is a popular destination for stand-up paddlers.",
       "id": 667,
       "location": "Lucerne",
       "maxParticipants": 6,
       "minParticipants": 4,
-      "price": "25",
+      "price": 25,
       "slug": "stand-up-paddle-surf-in-lake-lucerne",
       "status": "published",
       "title": "Stand-up paddle surf in Lake Lucerne",
@@ -167,7 +166,7 @@
       "paymentMethod": "card",
       "places": 1,
       "reason": "",
-      "status": "confirmed",
+      "status": "accepted",
       "userId": 3
     },
     {

@@ -26,7 +26,7 @@ import { DATA } from "src/app/data/data.repository";
 })
 export class ActivitiesComponent {
   activities = DATA.activities.filter((a) => a.status === "published");
-  getTitle() {
+  getTitle(): string {
     return `Published Activities ${this.activities.length}`;
   }
 }

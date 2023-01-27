@@ -195,7 +195,7 @@ export const DATA: Data = {
       paymentMethod: "card",
       places: 1,
       reason: "",
-      status: "confirmed",
+      status: "accepted",
       userId: 3,
     },
     {

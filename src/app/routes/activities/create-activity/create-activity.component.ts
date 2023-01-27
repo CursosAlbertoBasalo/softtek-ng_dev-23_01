@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { DATA } from "src/app/data/data.repository";
 import { Activity } from "src/app/data/models/activity.type";
+import { AgeCategory } from "src/app/data/models/option.type";
 
 @Component({
   selector: "lab-create-activity",
@@ -14,7 +15,7 @@ import { Activity } from "src/app/data/models/activity.type";
   styles: [],
 })
 export class CreateActivityComponent {
-  ageCategories = DATA.ageCategories;
+  ageCategories: AgeCategory[] = DATA.ageCategories;
   onCreate(newActivity: Activity) {
     console.warn("Create activity !!!", newActivity);
   }

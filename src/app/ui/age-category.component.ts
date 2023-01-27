@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { DATA } from "src/app/data/data.repository";
+import { Id } from "src/app/data/models/id.type";
+import { AgeCategory } from "src/app/data/models/option.type";
 
 @Component({
   selector: "lab-age-category",
@@ -9,18 +11,23 @@ import { DATA } from "src/app/data/data.repository";
   styles: [],
 })
 export class AgeCategoryComponent {
-  @Input() ageCategory = "";
+  @Input() ageCategory: Id = "0";
 
-  private ageCategories = DATA.ageCategories;
-  private defaultAgeCategory = { caption: "", icon: "❔" };
+  private ageCategories: AgeCategory[] = DATA.ageCategories;
+  private defaultAgeCategory: AgeCategory = {
+    caption: "",
+    icon: "❔",
+    id: "0",
+    userId: "0",
+  };
 
-  getTooltip() {
+  getTooltip(): string {
     return this.getAgeCategory().caption;
   }
-  getIcon() {
+  getIcon(): string {
     return this.getAgeCategory().icon;
   }
-  private getAgeCategory() {
+  private getAgeCategory(): AgeCategory {
     const ageCategory = this.ageCategories.find(
       (a) => a.id === this.ageCategory
     );

@@ -46,3 +46,11 @@ ng g m routes/home --route=home -m=app
 # generate a presentation component
 ng g c routes/activities/create-activity/create-activity-form --flat
 ```
+
+## Services
+
+```bash
+# To Do:
+# Core services (form feedback, slugs and ids, etc.)
+# Feature services (activities, auth, etc.)
+```

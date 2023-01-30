@@ -126,6 +126,8 @@ export class CreateActivityFormComponent {
       price: [10, [Validators.min(10), Validators.max(1000)]],
       currency: ["", []],
       ageCategory: ["child", [Validators.required]],
+      minParticipants: [0, []],
+      maxParticipants: [0, []],
     });
     this.fs.form = this.form;
     this.setInitialMockData();
@@ -140,6 +142,8 @@ export class CreateActivityFormComponent {
       price: 10,
       currency: "EUR",
       ageCategory: "child",
+      minParticipants: 10,
+      maxParticipants: 1,
     });
   }
 

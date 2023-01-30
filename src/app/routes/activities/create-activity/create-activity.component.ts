@@ -26,6 +26,11 @@ export class CreateActivityComponent {
   ) {}
 
   onCreate(newActivity: Activity) {
+    if (newActivity.minParticipants > newActivity.maxParticipants) {
+      throw new Error(
+        "Min participants cannot be greater than max participants"
+      );
+    }
     newActivity.slug = this.helper.slugify(newActivity.title);
     console.warn("Create activity !!!", newActivity);
     this.notifications.notification = {

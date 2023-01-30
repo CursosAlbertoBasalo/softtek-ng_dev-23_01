@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Activity } from "src/app/data/models/activity.type";
 import { AgeCategory } from "src/app/data/models/option.type";
+import { FormsService } from "src/app/services/forms.service";
 
 @Component({
   selector: "lab-create-activity-form",
@@ -15,9 +16,9 @@ import { AgeCategory } from "src/app/data/models/option.type";
             name="title"
             type="text"
             formControlName="title"
-            [attr.aria-invalid]="isInvalid('title')" />
-          <small *ngIf="hasMessage('title')">
-            {{ getError("title") }}
+            [attr.aria-invalid]="fs.isInvalid('title')" />
+          <small *ngIf="fs.hasMessage('title')">
+            {{ fs.getError("title") }}
           </small>
         </div>
         <div>
@@ -26,10 +27,10 @@ import { AgeCategory } from "src/app/data/models/option.type";
             id="description"
             name="description"
             formControlName="description"
-            [attr.aria-invalid]="isInvalid('description')">
+            [attr.aria-invalid]="fs.isInvalid('description')">
           </textarea>
-          <small *ngIf="hasMessage('description')">
-            {{ getError("description") }}
+          <small *ngIf="fs.hasMessage('description')">
+            {{ fs.getError("description") }}
           </small>
         </div>
         <div class="grid">
@@ -54,9 +55,9 @@ import { AgeCategory } from "src/app/data/models/option.type";
               name="price"
               type="number"
               formControlName="price"
-              [attr.aria-invalid]="isInvalid('price')" />
-            <small *ngIf="hasMessage('price')">
-              {{ getError("price") }}
+              [attr.aria-invalid]="fs.isInvalid('price')" />
+            <small *ngIf="fs.hasMessage('price')">
+              {{ fs.getError("price") }}
             </small>
           </div>
           <div>
@@ -66,7 +67,7 @@ import { AgeCategory } from "src/app/data/models/option.type";
               name="currency"
               type="text"
               formControlName="currency"
-              [attr.aria-invalid]="isInvalid('currency')" />
+              [attr.aria-invalid]="fs.isInvalid('currency')" />
           </div>
         </div>
         <div>
@@ -95,13 +96,14 @@ import { AgeCategory } from "src/app/data/models/option.type";
     </form>
   `,
   styles: [],
+  providers: [FormsService],
 })
 export class CreateActivityFormComponent {
   @Input() ageCategories: AgeCategory[] = [];
   @Output() create = new EventEmitter<Activity>();
 
   form: FormGroup;
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, public fs: FormsService) {
     this.form = fb.group({
       title: [
         "",
@@ -125,6 +127,7 @@ export class CreateActivityFormComponent {
       currency: ["", []],
       ageCategory: ["child", [Validators.required]],
     });
+    this.fs.form = this.form;
     this.setInitialMockData();
   }
 
@@ -138,25 +141,6 @@ export class CreateActivityFormComponent {
       currency: "EUR",
       ageCategory: "child",
     });
-  }
-
-  isInvalid(controlName: string): boolean | null {
-    const control = this.form.controls[controlName];
-    if (control.pristine) return null;
-    return control.invalid;
-  }
-
-  hasMessage(controlName: string): boolean {
-    const control = this.form.controls[controlName];
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  getError(controlName: string): string {
-    const errors = this.form.controls[controlName].errors;
-    if (!errors) return "";
-    if (errors["required"]) return "This field is required";
-
-    return JSON.stringify(this.form.controls[controlName].errors);
   }
 
   onSubmitClick() {

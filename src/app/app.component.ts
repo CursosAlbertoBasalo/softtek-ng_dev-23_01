@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { HelperService } from "src/app/services/helper.service";
 
 @Component({
   selector: "lab-root",
@@ -13,8 +12,5 @@ import { HelperService } from "src/app/services/helper.service";
   styles: [],
 })
 export class AppComponent {
-  constructor(public doer: HelperService) {
-    doer.doThings("Constructor AppComponent");
-    //this.doer = doer;
-  }
+  constructor() {}
 }

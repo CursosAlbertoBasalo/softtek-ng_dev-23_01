@@ -8,6 +8,7 @@ import { CreateActivityComponent } from "./create-activity.component";
 
 @NgModule({
   declarations: [CreateActivityComponent, CreateActivityFormComponent],
+  providers: [],
   imports: [CommonModule, CreateActivityRoutingModule, ReactiveFormsModule],
 })
 export class CreateActivityModule {}

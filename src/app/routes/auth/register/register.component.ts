@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormsService } from "src/app/services/forms.service";
 
 @Component({
   template: `
@@ -12,8 +13,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
           id="name"
           name="name"
           formControlName="name"
-          [attr.aria-invalid]="isInvalid('name')" />
-        <small *ngIf="hasMessage('name')">{{ getError("name") }}</small>
+          [attr.aria-invalid]="fs.isInvalid('name')" />
+        <small *ngIf="fs.hasMessage('name')">{{ fs.getError("name") }}</small>
 
         <label for="email">Email</label>
         <input
@@ -21,8 +22,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
           id="email"
           name="email"
           formControlName="email"
-          [attr.aria-invalid]="isInvalid('email')" />
-        <small *ngIf="hasMessage('email')">{{ getError("email") }}</small>
+          [attr.aria-invalid]="fs.isInvalid('email')" />
+        <small *ngIf="fs.hasMessage('email')">{{ fs.getError("email") }}</small>
 
         <label for="password">Password</label>
         <input
@@ -30,8 +31,10 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
           id="password"
           name="password"
           formControlName="password"
-          [attr.aria-invalid]="isInvalid('password')" />
-        <small *ngIf="hasMessage('password')">{{ getError("password") }}</small>
+          [attr.aria-invalid]="fs.isInvalid('password')" />
+        <small *ngIf="fs.hasMessage('password')">{{
+          fs.getError("password")
+        }}</small>
 
         <label for="confirmPassword">Confirm Password</label>
         <input
@@ -39,9 +42,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
           id="confirmPassword"
           name="confirmPassword"
           formControlName="confirmPassword"
-          [attr.aria-invalid]="isInvalid('confirmPassword')" />
-        <small *ngIf="hasMessage('confirmPassword')">
-          {{ getError("confirmPassword") }}
+          [attr.aria-invalid]="fs.isInvalid('confirmPassword')" />
+        <small *ngIf="fs.hasMessage('confirmPassword')">
+          {{ fs.getError("confirmPassword") }}
         </small>
       </fieldset>
       <div>
@@ -52,10 +55,11 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
       </div>
     </form>
   `,
+  providers: [FormsService],
 })
 export class RegisterComponent {
   form: FormGroup;
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, public fs: FormsService) {
     this.form = fb.group({
       name: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
@@ -76,25 +80,7 @@ export class RegisterComponent {
         ],
       ],
     });
-  }
-
-  isInvalid(controlName: string) {
-    const control = this.form.controls[controlName];
-    if (control.pristine) return null;
-    return control.invalid;
-  }
-
-  hasMessage(controlName: string) {
-    const control = this.form.controls[controlName];
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  getError(controlName: string) {
-    const errors = this.form.controls[controlName].errors;
-    if (!errors) return "";
-    if (errors["required"]) return "This field is required";
-
-    return JSON.stringify(this.form.controls[controlName].errors);
+    fs.form = this.form;
   }
 
   register() {

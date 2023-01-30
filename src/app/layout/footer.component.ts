@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { NotificationsService } from "src/app/services/notifications.service";
 
 @Component({
   selector: "lab-footer",
@@ -20,6 +21,7 @@ import { Component } from "@angular/core";
           </li>
         </ul>
       </nav>
+      <pre> {{ notifications.notification | json }} </pre>
     </footer>
   `,
   styles: [],
@@ -28,4 +30,6 @@ export class FooterComponent {
   title = "Activity bookings";
   repoUrl = "https://github.com/classroomLabs/softtek-angular_intro-enero";
   year = new Date().getFullYear();
+
+  constructor(public notifications: NotificationsService) {}
 }

@@ -3,6 +3,7 @@ import { DATA } from "src/app/data/data.repository";
 import { Activity } from "src/app/data/models/activity.type";
 import { AgeCategory } from "src/app/data/models/option.type";
 import { HelperService } from "src/app/services/helper.service";
+import { NotificationsService } from "src/app/services/notifications.service";
 
 @Component({
   selector: "lab-create-activity",
@@ -13,19 +14,24 @@ import { HelperService } from "src/app/services/helper.service";
       (create)="onCreate($event)">
     </lab-create-activity-form>
   `,
+  providers: [],
   styles: [],
 })
 export class CreateActivityComponent {
   ageCategories: AgeCategory[] = DATA.ageCategories;
-  //doer: HelperService;
 
-  constructor(public doer: HelperService) {
-    doer.doThings("Constructor CreateActivityComponent");
-    //this.doer = doer;
-  }
+  constructor(
+    public helper: HelperService,
+    public notifications: NotificationsService
+  ) {}
 
   onCreate(newActivity: Activity) {
+    newActivity.slug = this.helper.slugify(newActivity.title);
     console.warn("Create activity !!!", newActivity);
-    this.doer.doThings("onCreate");
+    this.notifications.notification = {
+      message: "Activity created",
+      type: "success",
+    };
+    console.warn("Notifications", this.notifications.notification);
   }
 }

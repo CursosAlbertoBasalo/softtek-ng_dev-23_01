@@ -4,10 +4,13 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class HelperService {
-  constructor() {
-    console.warn("HelperService.constructor()");
-  }
-  doThings(caller: string) {
-    console.warn("HelperService.doThings(): " + caller);
+  constructor() {}
+
+  slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/&/g, "-and-")
+      .replace(/[\s\W-]+/g, "-");
   }
 }

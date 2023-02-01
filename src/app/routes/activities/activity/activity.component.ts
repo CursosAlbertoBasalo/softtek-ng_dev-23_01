@@ -1,7 +1,7 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Activity } from "src/app/data/models/activity.type";
+import { ActivitiesApiService } from "src/app/services/activities-api.service";
 
 @Component({
   selector: "lab-activity",
@@ -10,12 +10,11 @@ import { Activity } from "src/app/data/models/activity.type";
 })
 export class ActivityComponent {
   activity!: Activity;
-  constructor(route: ActivatedRoute, http: HttpClient) {
-    const activitySlug = route.snapshot.paramMap.get("s") || "no slug";
-    http
-      .get<Activity[]>("http://localhost:3000/activities?slug=" + activitySlug)
-      .subscribe((data) => {
-        this.activity = data[0];
-      });
+  constructor(route: ActivatedRoute, api: ActivitiesApiService) {
+    const activitySlug = route.snapshot.paramMap.get("slug") || "no slug";
+
+    api.getBySlug$(activitySlug).subscribe((data) => {
+      this.activity = data[0];
+    });
   }
 }

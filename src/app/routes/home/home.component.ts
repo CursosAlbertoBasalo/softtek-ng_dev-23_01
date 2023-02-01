@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { Activity } from "src/app/data/models/activity.type";
+import { ActivitiesApiService } from "src/app/services/activities-api.service";
 
 @Component({
   selector: "lab-home",
@@ -11,9 +11,17 @@ export class HomeComponent {
   activities: Activity[] = [];
   // DATA.activities.filter( (a) => a.status === "published");
 
-  constructor(httpClient: HttpClient) {
-    httpClient
-      .get<Activity[]>("http://localhost:3000/activities?status=published")
-      .subscribe((activities) => (this.activities = activities));
+  constructor(activitiesApi: ActivitiesApiService) {
+    const activitiesObservable = activitiesApi.getByQuery$("status=published");
+
+    const subscription = activitiesObservable.subscribe(
+      (activities) => (this.activities = activities)
+    );
+
+    //subscription.unsubscribe();
+
+    // httpClient
+    //   .get<Activity[]>("http://localhost:3000/activities?status=published")
+    //   .subscribe((activities) => (this.activities = activities));
   }
 }

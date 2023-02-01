@@ -1,8 +1,8 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { DATA } from "src/app/data/data.repository";
 import { Activity } from "src/app/data/models/activity.type";
 import { AgeCategory } from "src/app/data/models/option.type";
+import { ActivitiesApiService } from "src/app/services/activities-api.service";
 import { HelperService } from "src/app/services/helper.service";
 import { NotificationsService } from "src/app/services/notifications.service";
 
@@ -24,7 +24,7 @@ export class CreateActivityComponent {
   constructor(
     public helper: HelperService,
     public notifications: NotificationsService,
-    public http: HttpClient
+    public api: ActivitiesApiService
   ) {}
 
   onCreate(newActivity: Activity) {
@@ -35,26 +35,24 @@ export class CreateActivityComponent {
     }
     newActivity.slug = this.helper.slugify(newActivity.title);
 
-    this.http
-      .post<Activity>("http://localhost:3000/activities", newActivity)
-      .subscribe({
-        next: (data) => {
-          console.warn("Create activity !!!", newActivity);
-          this.notifications.notification = {
-            message: "Activity created: " + data.id,
-            type: "success",
-          };
-          console.warn("Notifications", this.notifications.notification);
-        },
-        error: (error) => {
-          console.warn("Not Created activity !!!", newActivity);
-          this.notifications.notification = {
-            message: "Activity no created: " + error.message,
-            type: "error",
-          };
-          console.warn("Notifications", this.notifications.notification);
-        },
-      });
+    this.api.post$(newActivity).subscribe({
+      next: (data) => {
+        console.warn("Create activity !!!", newActivity);
+        this.notifications.notification = {
+          message: "Activity created: " + data.id,
+          type: "success",
+        };
+        console.warn("Notifications", this.notifications.notification);
+      },
+      error: (error) => {
+        console.warn("Not Created activity !!!", newActivity);
+        this.notifications.notification = {
+          message: "Activity no created: " + error.message,
+          type: "error",
+        };
+        console.warn("Notifications", this.notifications.notification);
+      },
+    });
   }
 }
 

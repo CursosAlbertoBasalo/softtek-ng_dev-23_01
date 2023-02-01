@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { DATA } from "src/app/data/data.repository";
+import { Component, Input } from "@angular/core";
+import { Activity } from "src/app/data/models/activity.type";
 
 @Component({
   selector: "lab-activities",
@@ -25,7 +25,7 @@ import { DATA } from "src/app/data/data.repository";
   styles: [],
 })
 export class ActivitiesComponent {
-  activities = DATA.activities.filter((a) => a.status === "published");
+  @Input() activities: Activity[] = [];
   getTitle(): string {
     return `Published Activities ${this.activities.length}`;
   }

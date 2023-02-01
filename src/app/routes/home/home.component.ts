@@ -13,7 +13,7 @@ export class HomeComponent {
 
   constructor(httpClient: HttpClient) {
     httpClient
-      .get<Activity[]>("http://localhost:3000/activities")
+      .get<Activity[]>("http://localhost:3000/activities?status=published")
       .subscribe((activities) => (this.activities = activities));
   }
 }

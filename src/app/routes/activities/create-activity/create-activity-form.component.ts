@@ -142,8 +142,8 @@ export class CreateActivityFormComponent {
       price: 10,
       currency: "EUR",
       ageCategory: "child",
-      minParticipants: 10,
-      maxParticipants: 1,
+      minParticipants: 1,
+      maxParticipants: 10,
     });
   }
 

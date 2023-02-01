@@ -1,14 +1,21 @@
+import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Activity } from "src/app/data/models/activity.type";
 
 @Component({
   selector: "lab-activity",
-  template: ` <p> {{ activitySlug }} </p> `,
+  template: ` <h2 *ngIf="activity"> {{ activity.title }} </h2> `,
   styles: [],
 })
 export class ActivityComponent {
-  activitySlug = "";
-  constructor(route: ActivatedRoute) {
-    this.activitySlug = route.snapshot.paramMap.get("slug") || "no slug";
+  activity!: Activity;
+  constructor(route: ActivatedRoute, http: HttpClient) {
+    const activitySlug = route.snapshot.paramMap.get("s") || "no slug";
+    http
+      .get<Activity[]>("http://localhost:3000/activities?slug=" + activitySlug)
+      .subscribe((data) => {
+        this.activity = data[0];
+      });
   }
 }

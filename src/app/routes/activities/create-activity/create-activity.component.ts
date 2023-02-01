@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { DATA } from "src/app/data/data.repository";
 import { Activity } from "src/app/data/models/activity.type";
@@ -22,7 +23,8 @@ export class CreateActivityComponent {
 
   constructor(
     public helper: HelperService,
-    public notifications: NotificationsService
+    public notifications: NotificationsService,
+    public http: HttpClient
   ) {}
 
   onCreate(newActivity: Activity) {
@@ -32,11 +34,54 @@ export class CreateActivityComponent {
       );
     }
     newActivity.slug = this.helper.slugify(newActivity.title);
-    console.warn("Create activity !!!", newActivity);
-    this.notifications.notification = {
-      message: "Activity created",
-      type: "success",
-    };
-    console.warn("Notifications", this.notifications.notification);
+
+    this.http
+      .post<Activity>("http://localhost:3000/activities", newActivity)
+      .subscribe({
+        next: (data) => {
+          console.warn("Create activity !!!", newActivity);
+          this.notifications.notification = {
+            message: "Activity created: " + data.id,
+            type: "success",
+          };
+          console.warn("Notifications", this.notifications.notification);
+        },
+        error: (error) => {
+          console.warn("Not Created activity !!!", newActivity);
+          this.notifications.notification = {
+            message: "Activity no created: " + error.message,
+            type: "error",
+          };
+          console.warn("Notifications", this.notifications.notification);
+        },
+      });
   }
 }
+
+// Classic subscription
+// this.http
+//   .post<Activity>("http://localhost:3000/activities", newActivity)
+//   .subscribe(
+//     (data) => {
+//       console.warn("Create activity !!!", newActivity);
+//       this.notifications.notification = {
+//         message: "Activity created: " + data.id,
+//         type: "success",
+//       };
+//       console.warn("Notifications", this.notifications.notification);
+//     },
+//     (error) => {
+//       console.warn("Not Created activity !!!", newActivity);
+//       this.notifications.notification = {
+//         message: "Activity no created: " + error.message,
+//         type: "error",
+//       };
+//       console.warn("Notifications", this.notifications.notification);
+//     }
+//   );
+
+// Modern subscription
+// this.http.get<any>("").subscribe({
+//   next: (data) => {},
+//   error: (error) => {},
+// });

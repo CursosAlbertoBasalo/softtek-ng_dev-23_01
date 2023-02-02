@@ -40,11 +40,7 @@ import { FormsService } from "src/app/services/forms.service";
           </div>
           <div>
             <label for="location"> Location </label>
-            <input
-              id="location"
-              name="location"
-              type="text"
-              formControlName="location" />
+            <input id="location" name="location" type="text" formControlName="location" />
           </div>
         </div>
         <div class="grid">
@@ -72,13 +68,8 @@ import { FormsService } from "src/app/services/forms.service";
         </div>
         <div>
           <label for="ageCategory"> Age Category </label>
-          <select
-            id="ageCategory"
-            name="ageCategory"
-            formControlName="ageCategory">
-            <option
-              *ngFor="let ageCategory of ageCategories"
-              [value]="ageCategory.id">
+          <select id="ageCategory" name="ageCategory" formControlName="ageCategory">
+            <option *ngFor="let ageCategory of ageCategories" [value]="ageCategory.id">
               {{ ageCategory.icon + ageCategory.caption }}
             </option>
           </select>
@@ -86,10 +77,7 @@ import { FormsService } from "src/app/services/forms.service";
       </fieldset>
       <div>
         <button class="secondary" (click)="form.reset()">Reset</button>
-        <button
-          type="submit"
-          (click)="onSubmitClick()"
-          [disabled]="form.invalid">
+        <button type="submit" (click)="onSubmitClick()" [disabled]="form.invalid">
           Create activity
         </button>
       </div>
@@ -105,21 +93,10 @@ export class CreateActivityFormComponent {
   form: FormGroup;
   constructor(fb: FormBuilder, public fs: FormsService) {
     this.form = fb.group({
-      title: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(100),
-        ],
-      ],
+      title: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       description: [
         "",
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(1000),
-        ],
+        [Validators.required, Validators.minLength(10), Validators.maxLength(1000)],
       ],
       date: ["", [Validators.required]],
       location: ["", [Validators.required]],
@@ -149,6 +126,6 @@ export class CreateActivityFormComponent {
 
   onSubmitClick() {
     console.log("On Click", this.form.value);
-    this.create.emit(this.form.value);
+    this.create.next(this.form.value);
   }
 }

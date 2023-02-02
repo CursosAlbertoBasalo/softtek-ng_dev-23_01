@@ -33,19 +33,19 @@ export class ActivitiesApiService {
       tap({
         next: (data) => {
           console.warn("Create activity !!!", newActivity);
-          this.notifications.notification = {
+          this.notifications.notify({
             message: "Activity created: " + data.id,
             type: "success",
-          };
-          console.warn("Notifications", this.notifications.notification);
+          });
+          console.warn("Notifications", this.notifications.getSnapshot());
         },
         error: (error) => {
           console.warn("Not Created activity !!!", newActivity);
-          this.notifications.notification = {
+          this.notifications.notify({
             message: "Activity no created: " + error.message,
             type: "error",
-          };
-          console.warn("Notifications", this.notifications.notification);
+          });
+          console.warn("Notifications", this.notifications.getSnapshot());
         },
       })
     );

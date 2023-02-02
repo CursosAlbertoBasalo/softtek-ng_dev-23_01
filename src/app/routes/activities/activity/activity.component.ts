@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
 import { Activity } from "src/app/data/models/activity.type";
 import { ActivitiesApiService } from "src/app/services/activities-api.service";
 
@@ -13,8 +14,7 @@ export class ActivityComponent {
   constructor(route: ActivatedRoute, api: ActivitiesApiService) {
     const activitySlug = route.snapshot.paramMap.get("slug") || "no slug";
 
-    api.getBySlug$(activitySlug).subscribe((data) => {
-      this.activity = data[0];
-    });
+    const activityObservable: Observable<Activity> = api.getBySlug$(activitySlug);
+    activityObservable.subscribe((activity: Activity) => (this.activity = activity));
   }
 }

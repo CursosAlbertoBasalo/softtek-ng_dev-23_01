@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NotificationsService } from "src/app/services/notifications.service";
 import { Notification } from "../data/models/notification.type";
 
@@ -27,15 +27,20 @@ import { Notification } from "../data/models/notification.type";
   `,
   styles: [],
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   title = "Activity bookings";
   repoUrl = "https://github.com/classroomLabs/softtek-angular_intro-enero";
   year = new Date().getFullYear();
   notification!: Notification;
 
-  constructor(public notifications: NotificationsService) {
-    // notifications.notification$.next();
-    notifications
+  constructor(public notifications: NotificationsService) {}
+
+  ngOnInit(): void {
+    this.subscribeToSource();
+  }
+
+  subscribeToSource() {
+    this.notifications
       .getNotification$()
       .subscribe((notification) => (this.notification = notification));
   }

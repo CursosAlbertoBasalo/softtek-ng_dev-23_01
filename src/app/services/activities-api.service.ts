@@ -2,14 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable, tap } from "rxjs";
 import { Activity } from "src/app/data/models/activity.type";
+import { environment } from "src/environments/environment";
 import { NotificationsService } from "./notifications.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ActivitiesApiService {
-  // ToDo: get from environment
-  resourceUrl = "http://localhost:3000/activities";
+  resourceUrl = environment.apiUrl + "/activities";
   constructor(private httpClient: HttpClient, private notifications: NotificationsService) {}
 
   getAll$(): Observable<Activity[]> {
@@ -30,23 +30,13 @@ export class ActivitiesApiService {
 
   post$(newActivity: Activity): Observable<Activity> {
     return this.httpClient.post<Activity>(this.resourceUrl, newActivity).pipe(
-      tap({
-        next: (data) => {
-          console.warn("Create activity !!!", newActivity);
-          this.notifications.notify({
-            message: "Activity created: " + data.id,
-            type: "success",
-          });
-          console.warn("Notifications", this.notifications.getSnapshot());
-        },
-        error: (error) => {
-          console.warn("Not Created activity !!!", newActivity);
-          this.notifications.notify({
-            message: "Activity no created: " + error.message,
-            type: "error",
-          });
-          console.warn("Notifications", this.notifications.getSnapshot());
-        },
+      tap((data) => {
+        console.warn("Create activity !!!", newActivity);
+        this.notifications.notify({
+          message: "Activity created: " + data.id,
+          type: "success",
+        });
+        console.warn("Notifications", this.notifications.getSnapshot());
       })
     );
   }

@@ -54,3 +54,5 @@ ng g c routes/activities/create-activity/create-activity-form --flat
 # Core services (form feedback, slugs and ids, etc.)
 # Feature services (activities, auth, etc.)
 ```
+
+npm i -D json-server-auth

@@ -1,6 +1,10 @@
 # Softtek Angular Intro Enero
 
+[https://github.com/classroomLabs/softtek-ng_dev-23_01](https://github.com/classroomLabs/softtek-ng_dev-23_01)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
+
+`npx -p @angular/cli@15.1.1 ng new softtek-ng_dev-23_01`
 
 ## Development server
 
